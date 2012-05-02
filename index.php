@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Refactoring with Backbone.js</title>
+    <meta charset="UTF-8" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/screen.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="container" class="container">
+
+    <div id="product-list">
+      <ul></ul>
+    </div>
+
+    <div id="product-info">
+      <section>
+        <h1></h1>
+        <p><img src="" alt=""></p>
+      </section>
+    </div>
+
+    <script src="lib/jquery/jquery-min.js"></script>
+    <script src="lib/underscore/underscore-min.js"></script>
+    <script src="lib/backbone/backbone-min.js"></script>
+    <script src="js/app.js"></script>
+
+    </div>
+  </body>
+</html>
+
