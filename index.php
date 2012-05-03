@@ -16,7 +16,8 @@
     <div id="product-info">
       <section>
         <h1></h1>
-        <p><img src="" alt=""></p>
+        <p class="image"><img src="" alt=""></p>
+        <p class="desc"></p>
       </section>
     </div>
 
