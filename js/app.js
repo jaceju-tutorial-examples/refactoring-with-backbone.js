@@ -10,6 +10,14 @@ var ProductList = Backbone.Collection.extend({
   model: Product
 });
 
+var ProductItemView = Backbone.View.extend({
+  template: _.template($('#item-template').html()),
+  render: function () {
+    this.$el.html(this.template(this.model.toJSON()));
+    return this;
+  }
+});
+
 var ProductInfoView = Backbone.View.extend({
   template: _.template($('#info-template').html()),
   render: function () {
@@ -26,9 +34,11 @@ var init = function () {
 
     var $ul = $('#product-list>ul').empty();
 
-    var itemTemplate = _.template($('#item-template').html());
     productList.forEach(function (product) {
-      $ul.append(itemTemplate(product.toJSON()));
+      var itemView = new ProductItemView({
+        model: product
+      })
+      $ul.append(itemView.render().el);
     });
 
     var infoView = new ProductInfoView({
