@@ -11,9 +11,7 @@ var init = function () {
       var product = productList[idx];
       $ul.append('<li><a id="product-'
         + product.id
-        + '" href="json.php?id='
-        + product.id
-        + '">' + product.name
+        + '" href="#">' + product.name
         + '</a></li>');
     }
     $('a', $ul).bind('click', function (e) {
