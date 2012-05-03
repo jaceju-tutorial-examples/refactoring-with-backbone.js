@@ -45,6 +45,8 @@ var init = function () {
 
     var productList = new ProductList(json);
 
+    var product = new Product();
+
     var $ul = $('#product-list>ul').empty();
 
     var listView = new ProductListView({
@@ -53,21 +55,22 @@ var init = function () {
     });
 
     var infoView = new ProductInfoView({
-      el: '#product-info'
+      el: '#product-info',
+      model: product
     });
+
+    product.on('change', infoView.render, infoView);
 
     $('a', $ul).bind('click', function (e) {
 
       e.preventDefault();
 
       var id = this.id.replace(/^product-/, '');
-      var product = productList.get(id);
 
       $('a', $ul).removeClass('active')
       $(this).addClass('active');
 
-      infoView.model = product;
-      infoView.render();
+      product.set(productList.get(id).toJSON());
 
     }).eq(0).click();
 
