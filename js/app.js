@@ -1,31 +1,45 @@
-var productList = null;
+var Product = Backbone.Model.extend({
+  defaults: {
+    name: '',
+    image: '',
+    desc: ''
+  }
+});
+
+var ProductList = Backbone.Collection.extend({
+  model: Product
+});
 
 var init = function () {
   $.get('json.php', function (json) {
 
-    productList = json;
+    var productList = new ProductList(json);
+
     $ul = $('#product-list>ul').empty();
     $info = $('#product-info');
 
-    for(id in productList) {
-      var row = productList[id];
+    productList.forEach(function (product) {
       $ul.append('<li><a id="product-'
-        + row.id
+        + product.get('id')
         + '" href="json.php?id='
-        + row.id
-        + '">' + row.name
+        + product.get('id')
+        + '">' + product.get('name')
         + '</a></li>');
-    }
+    });
     $('a', $ul).bind('click', function (e) {
       e.preventDefault();
       var id = this.id.replace(/^product-/, '');
-      var row = productList[id];
-      $('h1', $info).text(row.name);
+      var product = productList.get(id);
+
+      $('a', $ul).removeClass('active')
+      $(this).addClass('active');
+      $('h1', $info).text(product.get('name'));
       $('img', $info).attr({
-        src: row.image,
-        alt: row.name
+        src: product.get('image'),
+        alt: product.get('name')
       });
-    });
+      $('.desc', $info).text(product.get('desc'));
+    }).eq(0).click();
   }, 'json');
 };
 
