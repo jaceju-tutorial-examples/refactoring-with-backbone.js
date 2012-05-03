@@ -11,6 +11,7 @@ var ProductList = Backbone.Collection.extend({
 });
 
 var init = function () {
+
   $.get('json.php', function (json) {
 
     var productList = new ProductList(json);
@@ -26,7 +27,9 @@ var init = function () {
     });
 
     $('a', $ul).bind('click', function (e) {
+
       e.preventDefault();
+
       var id = this.id.replace(/^product-/, '');
       var product = productList.get(id);
 
@@ -37,8 +40,11 @@ var init = function () {
         src: product.get('image'),
         alt: product.get('name')
       });
+
       $('.desc', $info).text(product.get('desc'));
+
     }).eq(0).click();
+
   }, 'json');
 };
 

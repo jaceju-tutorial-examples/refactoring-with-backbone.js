@@ -1,6 +1,7 @@
 var productList = null;
 
 var init = function () {
+
   $.get('json.php', function (json) {
 
     productList = json;
@@ -14,8 +15,11 @@ var init = function () {
         + '" href="#">' + product.name
         + '</a></li>');
     }
+
     $('a', $ul).bind('click', function (e) {
+
       e.preventDefault();
+
       var id = this.id.replace(/^product-/, '');
       var product = _.find(productList, function(p) {
         return p.id == id;
@@ -29,7 +33,9 @@ var init = function () {
         alt: product.name
       });
       $('.desc', $info).text(product.desc);
+
     }).eq(0).click();
+
   }, 'json');
 };
 
