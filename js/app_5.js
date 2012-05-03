@@ -32,7 +32,6 @@ var init = function () {
     var productList = new ProductList(json);
 
     $ul = $('#product-list>ul').empty();
-    $info = $('#product-info');
 
     productList.forEach(function (product) {
       var itemView = new ProductItemView({

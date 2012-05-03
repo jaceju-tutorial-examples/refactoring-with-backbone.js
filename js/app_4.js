@@ -24,7 +24,6 @@ var init = function () {
     var productList = new ProductList(json);
 
     $ul = $('#product-list>ul').empty();
-    $info = $('#product-info');
 
     var itemTemplate = _.template($('#item-template').html());
     productList.forEach(function (product) {
