@@ -24,6 +24,7 @@ var init = function () {
         + '" href="#">' + product.get('name')
         + '</a></li>');
     });
+
     $('a', $ul).bind('click', function (e) {
       e.preventDefault();
       var id = this.id.replace(/^product-/, '');
