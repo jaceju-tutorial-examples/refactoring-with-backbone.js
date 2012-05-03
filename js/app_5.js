@@ -31,7 +31,7 @@ var init = function () {
 
     var productList = new ProductList(json);
 
-    $ul = $('#product-list>ul').empty();
+    var $ul = $('#product-list>ul').empty();
 
     productList.forEach(function (product) {
       var itemView = new ProductItemView({

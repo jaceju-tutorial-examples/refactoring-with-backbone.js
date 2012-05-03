@@ -23,7 +23,7 @@ var init = function () {
 
     var productList = new ProductList(json);
 
-    $ul = $('#product-list>ul').empty();
+    var $ul = $('#product-list>ul').empty();
 
     var itemTemplate = _.template($('#item-template').html());
     productList.forEach(function (product) {

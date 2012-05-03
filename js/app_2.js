@@ -15,8 +15,8 @@ var init = function () {
 
     var productList = new ProductList(json);
 
-    $ul = $('#product-list>ul').empty();
-    $info = $('#product-info');
+    var $ul = $('#product-list>ul').empty();
+    var $info = $('#product-info');
 
     productList.forEach(function (product) {
       $ul.append('<li><a id="product-'

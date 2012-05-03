@@ -4,8 +4,8 @@ var init = function () {
   $.get('json.php', function (json) {
 
     productList = json;
-    $ul = $('#product-list>ul').empty();
-    $info = $('#product-info');
+    var $ul = $('#product-list>ul').empty();
+    var $info = $('#product-info');
 
     for(idx in productList) {
       var product = productList[idx];
