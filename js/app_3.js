@@ -20,7 +20,7 @@ var init = function () {
 
     var itemTemplate = _.template($('#item-template').html());
     productList.forEach(function (product) {
-      $ul.append(itemTemplate(product.toJSON()))
+      $ul.append(itemTemplate(product.toJSON()));
     });
 
     var infoTemplate = _.template($('#info-template').html());
