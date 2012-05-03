@@ -7,7 +7,8 @@ var Product = Backbone.Model.extend({
 });
 
 var ProductList = Backbone.Collection.extend({
-  model: Product
+  model: Product,
+  url: 'json.php'
 });
 
 var ProductListView = Backbone.View.extend({
@@ -56,30 +57,26 @@ var ProductInfoView = Backbone.View.extend({
 
 var init = function () {
 
-  $.get('json.php', function (json) {
+  var productList = new ProductList();
 
-    var productList = new ProductList(json);
+  var product = new Product();
 
-    var product = new Product();
+  var listView = new ProductListView({
+    el: '#product-list',
+    collection: productList,
+    model: product
+  });
 
-    var listView = new ProductListView({
-      el: '#product-list',
-      collection: productList,
-      model: product
-    });
+  var infoView = new ProductInfoView({
+    el: '#product-info',
+    model: product
+  });
 
-    var infoView = new ProductInfoView({
-      el: '#product-info',
-      model: product
-    });
+  product.on('change', infoView.render, infoView);
+  productList.on('all', listView.render, listView);
+  productList.fetch();
 
-    product.on('change', infoView.render, infoView);
-
-    listView.render();
-
-  }, 'json');
 };
-
 
 $(function () {
   init();
