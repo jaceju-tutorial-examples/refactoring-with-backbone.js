@@ -1,9 +1,61 @@
+@import "compass/reset"
+@import "compass/css3"
+
+body
+  background: #369
+
 #container
+  width: 600px
   margin-top: 20px
+  overflow: hidden
+  background: #fff
+  +border-radius(5px)
 
-#product-list, #product-info
+#product-list
   float: left
-  width: 50%
+  width: 120px
+  height: 370px
+  background: #ccc
 
-#product-info img
-  height: 300px
+  ul
+    margin: 0
+    padding: 0
+
+  li
+    list-style: none
+
+    a
+      display: block
+      text-align: center
+      padding: 10px 5px
+      font:
+        size: 1em
+
+      &:hover
+        background: #eee
+        text-decoration: none
+
+      &.active
+        color: #fff
+        background: #036
+
+#product-info
+  padding: 20px 10px 0 10px
+  float: left
+  width: 450px
+  height: 340px
+  border: 5px solid #036
+  background: #fff
+
+  h1
+    text-align: center
+    font:
+      size: 2em
+      weight: bold
+
+  p.image
+    text-align: center
+
+  img
+    height: 150px
+    margin: 25px auto
