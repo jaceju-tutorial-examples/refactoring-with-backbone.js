@@ -19,13 +19,12 @@ var init = function () {
     var $ul = $('#product-list>ul').empty();
     var $info = $('#product-info');
 
+    var itemTemplate = _.template($('#item-template').html());
     productList.forEach(function (product) {
-      $ul.append('<li><a id="product-'
-        + product.get('id')
-        + '" href="#">' + product.get('name')
-        + '</a></li>');
+      $ul.append(itemTemplate(product.toJSON()));
     });
 
+    var infoTemplate = _.template($('#info-template').html());
     $('a', $ul).bind('click', function (e) {
 
       e.preventDefault();
@@ -35,13 +34,8 @@ var init = function () {
 
       $('a', $ul).removeClass('active')
       $(this).addClass('active');
-      $('h1', $info).text(product.get('name'));
-      $('img', $info).attr({
-        src: product.get('image'),
-        alt: product.get('name')
-      });
 
-      $('.desc', $info).text(product.get('desc'));
+      $info.html(infoTemplate(product.toJSON()));
 
     }).eq(0).click();
 
