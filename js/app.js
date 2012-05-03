@@ -10,6 +10,14 @@ var ProductList = Backbone.Collection.extend({
   model: Product
 });
 
+var ProductInfoView = Backbone.View.extend({
+  template: _.template($('#info-template').html()),
+  render: function () {
+    this.$el.html(this.template(this.model.toJSON()));
+    return this;
+  }
+});
+
 var init = function () {
 
   $.get('json.php', function (json) {
@@ -17,14 +25,16 @@ var init = function () {
     var productList = new ProductList(json);
 
     var $ul = $('#product-list>ul').empty();
-    var $info = $('#product-info');
 
     var itemTemplate = _.template($('#item-template').html());
     productList.forEach(function (product) {
       $ul.append(itemTemplate(product.toJSON()));
     });
 
-    var infoTemplate = _.template($('#info-template').html());
+    var infoView = new ProductInfoView({
+      el: '#product-info'
+    });
+
     $('a', $ul).bind('click', function (e) {
 
       e.preventDefault();
@@ -35,7 +45,8 @@ var init = function () {
       $('a', $ul).removeClass('active')
       $(this).addClass('active');
 
-      $info.html(infoTemplate(product.toJSON()));
+      infoView.model = product;
+      infoView.render();
 
     }).eq(0).click();
 
