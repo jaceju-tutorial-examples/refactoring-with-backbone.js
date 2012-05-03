@@ -1,45 +1,41 @@
-var Product = Backbone.Model.extend({
-  defaults: {
-    name: '',
-    image: '',
-    desc: ''
-  }
-});
-
-var ProductList = Backbone.Collection.extend({
-  model: Product
-});
+var productList = null;
 
 var init = function () {
+
   $.get('json.php', function (json) {
 
-    var productList = new ProductList(json);
+    productList = json;
+    var $ul = $('#product-list>ul').empty();
+    var $info = $('#product-info');
 
-    $ul = $('#product-list>ul').empty();
-    $info = $('#product-info');
-
-    productList.forEach(function (product) {
+    for(idx in productList) {
+      var product = productList[idx];
       $ul.append('<li><a id="product-'
-        + product.get('id')
-        + '" href="json.php?id='
-        + product.get('id')
-        + '">' + product.get('name')
+        + product.id
+        + '" href="#">' + product.name
         + '</a></li>');
-    });
+    }
+
     $('a', $ul).bind('click', function (e) {
+
       e.preventDefault();
+
       var id = this.id.replace(/^product-/, '');
-      var product = productList.get(id);
+      var product = _.find(productList, function(p) {
+        return p.id == id;
+      });
 
       $('a', $ul).removeClass('active')
       $(this).addClass('active');
-      $('h1', $info).text(product.get('name'));
+      $('h1', $info).text(product.name);
       $('img', $info).attr({
-        src: product.get('image'),
-        alt: product.get('name')
+        src: product.image,
+        alt: product.name
       });
-      $('.desc', $info).text(product.get('desc'));
+      $('.desc', $info).text(product.desc);
+
     }).eq(0).click();
+
   }, 'json');
 };
 
