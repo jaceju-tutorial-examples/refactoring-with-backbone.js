@@ -20,6 +20,21 @@ var ProductListView = Backbone.View.extend({
       })
       $ul.append(itemView.render().el);
     });
+
+    $('a:eq(0)', this.el).click();
+  },
+  events: {
+    'click a': 'changeProductInfo'
+  },
+  changeProductInfo: function (e) {
+    e.preventDefault();
+    var target = e.target;
+    var id = target.id.replace(/^product-/, '');
+
+    $('a', this.el).removeClass('active')
+    $(target).addClass('active');
+
+    this.model.set(this.collection.get(id).toJSON());
   }
 });
 
@@ -47,11 +62,10 @@ var init = function () {
 
     var product = new Product();
 
-    var $ul = $('#product-list>ul').empty();
-
     var listView = new ProductListView({
       el: '#product-list',
-      collection: productList
+      collection: productList,
+      model: product
     });
 
     var infoView = new ProductInfoView({
@@ -60,19 +74,6 @@ var init = function () {
     });
 
     product.on('change', infoView.render, infoView);
-
-    $('a', $ul).bind('click', function (e) {
-
-      e.preventDefault();
-
-      var id = this.id.replace(/^product-/, '');
-
-      $('a', $ul).removeClass('active')
-      $(this).addClass('active');
-
-      product.set(productList.get(id).toJSON());
-
-    }).eq(0).click();
 
     listView.render();
 
