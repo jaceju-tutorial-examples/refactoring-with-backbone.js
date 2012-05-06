@@ -23,6 +23,8 @@ var ProductListView = Backbone.View.extend({
     });
 
     $('a:eq(0)', this.el).click();
+
+    return this;
   },
   events: {
     'click a': 'changeProductInfo'

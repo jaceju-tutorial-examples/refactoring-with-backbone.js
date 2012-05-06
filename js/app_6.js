@@ -20,6 +20,8 @@ var ProductListView = Backbone.View.extend({
       })
       $ul.append(itemView.render().el);
     });
+
+    return this;
   }
 });
 
